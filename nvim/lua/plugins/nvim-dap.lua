@@ -1,133 +1,9 @@
 return {
+  -- Extend nvim-dap with extra keymaps or config
   {
     "mfussenegger/nvim-dap",
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        opts = {},
-      },
-    },
+    -- Add additional keymaps to the default ones
     keys = {
-      {
-        "<leader>dB",
-        function()
-          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-        end,
-        desc = "Breakpoint Condition",
-      },
-      {
-        "<leader>db",
-        function()
-          require("dap").toggle_breakpoint()
-        end,
-        desc = "Toggle Breakpoint",
-      },
-      {
-        "<leader>dc",
-        function()
-          require("dap").continue()
-        end,
-        desc = "Run/Continue",
-      },
-      {
-        "<leader>da",
-        function()
-          require("dap").continue({ before = get_args })
-        end,
-        desc = "Run with Args",
-      },
-      {
-        "<leader>dC",
-        function()
-          require("dap").run_to_cursor()
-        end,
-        desc = "Run to Cursor",
-      },
-      {
-        "<leader>dg",
-        function()
-          require("dap").goto_()
-        end,
-        desc = "Go to Line (No Execute)",
-      },
-      {
-        "<leader>di",
-        function()
-          require("dap").step_into()
-        end,
-        desc = "Step Into",
-      },
-      {
-        "<leader>dj",
-        function()
-          require("dap").down()
-        end,
-        desc = "Down",
-      },
-      {
-        "<leader>dk",
-        function()
-          require("dap").up()
-        end,
-        desc = "Up",
-      },
-      {
-        "<leader>dl",
-        function()
-          require("dap").run_last()
-        end,
-        desc = "Run Last",
-      },
-      {
-        "<leader>do",
-        function()
-          require("dap").step_out()
-        end,
-        desc = "Step Out",
-      },
-      {
-        "<leader>dO",
-        function()
-          require("dap").step_over()
-        end,
-        desc = "Step Over",
-      },
-      {
-        "<leader>dP",
-        function()
-          require("dap").pause()
-        end,
-        desc = "Pause",
-      },
-      {
-        "<leader>dr",
-        function()
-          require("dap").repl.toggle()
-        end,
-        desc = "Toggle REPL",
-      },
-      {
-        "<leader>ds",
-        function()
-          require("dap").session()
-        end,
-        desc = "Session",
-      },
-      {
-        "<leader>dt",
-        function()
-          require("dap").terminate()
-        end,
-        desc = "Terminate",
-      },
-      {
-        "<leader>dw",
-        function()
-          require("dap.ui.widgets").hover()
-        end,
-        desc = "Widgets",
-      },
       {
         "<F5>",
         function()
@@ -186,35 +62,23 @@ return {
       },
     },
     config = function()
-      if LazyVim.has("mason-nvim-dap.nvim") then
-        require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
+      -- Call the original config if you want to preserve everything (as loaded by lazy extras)
+      local loaded, dap_extra = pcall(require, "lazyvim.plugins.extras.dap.core")
+      if loaded and dap_extra and dap_extra.config then
+        dap_extra.config()
       end
-      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-      for name, sign in pairs(LazyVim.config.icons.dap) do
-        sign = type(sign) == "table" and sign or { sign }
-        vim.fn.sign_define(
-          "Dap" .. name,
-          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-        )
-      end
-      -- Setup dap config from VSCode launch.json if available
-      local vscode = require("dap.ext.vscode")
-      local json = require("plenary.json")
-      vscode.json_decode = function(str)
-        return vim.json.decode(json.json_strip_comments(str))
-      end
-      -- Loads .vscode/launch.json from the project root by default
+      -- Add your additional config here (for example: load_launchjs for python adapters)
       require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" }, python = { "python" } })
     end,
   },
+  -- Add dap-python for python debugging
   {
     "mfussenegger/nvim-dap-python",
     config = function()
-      -- Use active venv as the Python interpreter for debugging
       local function get_python_path()
-        local venv_path = os.getenv("VIRTUAL_ENV")
-        if venv_path ~= nil and venv_path ~= "" then
-          return venv_path .. "/bin/python"
+        local venv = os.getenv("VIRTUAL_ENV")
+        if venv and venv ~= "" then
+          return venv .. "/bin/python"
         else
           return "python"
         end
