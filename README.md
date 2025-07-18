@@ -1,7 +1,6 @@
 # nvim tmux dotfiles
 
 ## Setup 
-```bash
 
 ```bash
 sudo chmod +x ./install.sh
