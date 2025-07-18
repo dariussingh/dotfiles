@@ -8,5 +8,3 @@ sudo chmod +x ./install.sh
 sudo ./install.sh
 sudo source ~/.bashrc
 ```
-```
-```
