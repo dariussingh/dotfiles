@@ -152,10 +152,8 @@ mkdir -p ~/.config
 ln -sfn "$REPO_DIR/nvim" ~/.config/nvim
 
 echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
-ln -sfn "$REPO_DIR/tmux" ~/.tmux
-
-echo "🔗 Symlinking tmux.conf: ~/.tmux.conf -> $REPO_DIR/tmux/tmux.conf"
-ln -sfn "$REPO_DIR/tmux/tmux.conf" ~/.tmux.conf
+mkdir -p ~/.tmux
+ln -s "$REPO_DIR/tmux" ~/.tmux
 
 # ----------------------------
 # INSTALL TPM (Tmux Plugin Manager)
