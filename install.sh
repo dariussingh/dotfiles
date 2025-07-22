@@ -88,6 +88,13 @@ else
 fi
 
 # ----------------------------
+# INSTALL DEV CONTAINERS CLI
+# ----------------------------
+echo "📦 Installing Dev Containers CLI..."
+npm install -g @devcontainers/cli
+echo "✅ Dev Containers CLI installed: $(devcontainers --version)"
+
+# ----------------------------
 # VIRTUALENV HELPERS
 # ----------------------------
 echo "🛠️ Adding virtualenv helpers to ~/.bashrc..."
