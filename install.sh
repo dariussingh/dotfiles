@@ -1,6 +1,6 @@
 #!/bin/bash
-
-set -e
+set -euo pipefail
+trap 'echo "❌ Script failed at line $LINENO."; exit 1' ERR
 
 echo "🔧 Updating and upgrading system packages..."
 # sudo apt update && sudo apt upgrade -y
@@ -12,12 +12,12 @@ echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full
 
 # ----------------------------
-# INSTALL LAZYGIT MANUALLY (No PPA)
+# INSTALL LAZYGIT
 # ----------------------------
 echo "📦 Installing LazyGit manually from GitHub..."
-LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
+LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -oP '"tag_name": "\Kv[0-9.]+' )
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
+tar -xzf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin/
 rm lazygit lazygit.tar.gz
 echo "✅ LazyGit $(lazygit --version) installed"
@@ -33,7 +33,7 @@ echo "📁 Installing Neovim to /opt/nvim..."
 sudo mkdir -p /opt/nvim
 sudo mv nvim-linux-x86_64.appimage /opt/nvim/nvim
 
-if ! grep -q 'export PATH="$PATH:/opt/nvim"' ~/.bashrc; then
+if ! grep -q '/opt/nvim' ~/.bashrc; then
   echo 'export PATH="$PATH:/opt/nvim"' >>~/.bashrc
   echo "✅ Added /opt/nvim to PATH in ~/.bashrc"
 else
@@ -46,7 +46,6 @@ echo "✅ Neovim installed to /opt/nvim/nvim"
 # INSTALL NVM + NODE + NPM
 # ----------------------------
 echo "📦 Installing NVM (Node Version Manager)..."
-
 export NVM_DIR="$HOME/.nvm"
 if [ ! -d "$NVM_DIR" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -54,7 +53,7 @@ else
   echo "ℹ️ NVM already installed, skipping..."
 fi
 
-if ! grep -q 'export NVM_DIR' ~/.bashrc; then
+if ! grep -q 'NVM Configuration' ~/.bashrc; then
   cat <<'EOF' >>~/.bashrc
 
 # NVM Configuration
@@ -67,26 +66,35 @@ else
   echo "ℹ️ NVM already configured in ~/.bashrc"
 fi
 
-# Temporarily load NVM for this script
 export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+else
+  echo "❌ NVM script not found at $NVM_DIR/nvm.sh"
+  exit 1
+fi
 
 echo "📥 Installing latest Node.js (LTS) via NVM..."
-nvm install --lts
-nvm use --lts
-nvm alias default 'lts/*'
-echo "✅ Node.js: $(node -v), NPM: $(npm -v)"
+nvm install --lts || echo "⚠️ Node.js LTS may already be installed."
+NODE_LTS_VERSION=$(nvm ls --no-colors | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+
+if [[ -n "$NODE_LTS_VERSION" ]]; then
+  nvm use "$NODE_LTS_VERSION"
+  nvm alias default "$NODE_LTS_VERSION"
+  echo "✅ Node.js: $(node -v), NPM: $(npm -v)"
+else
+  echo "❌ Failed to detect installed Node.js LTS version."
+  exit 1
+fi
 
 # ----------------------------
 # VIRTUALENV HELPERS
 # ----------------------------
 echo "🛠️ Adding virtualenv helpers to ~/.bashrc..."
-
 VENV_HELPERS='
 # ----------------------------
 # VIRTUALENV HELPERS
 # ----------------------------
-
 mkvirtualenv() {
   if [ -z "$1" ]; then
     echo "Usage: mkvirtualenv <env_name>"
@@ -96,7 +104,6 @@ mkvirtualenv() {
     echo "💡 To activate it, run: workon $1"
   fi
 }
-
 workon() {
   if [ -z "$1" ]; then
     echo "Usage: workon <env_name>"
@@ -111,7 +118,6 @@ workon() {
     fi
   fi
 }
-
 _complete_workon() {
   COMPREPLY=($(compgen -W "$(ls -1 "$HOME/.virtualenvs")" -- "${COMP_WORDS[1]}"))
 }
@@ -143,17 +149,25 @@ echo "🟢 Installing neovim Node.js package..."
 npm install -g neovim
 
 # ----------------------------
+# FORCE INSTALL Lazy.nvim PLUGIN MANAGER
+# ----------------------------
+echo "📦 Installing Lazy.nvim plugin manager..."
+LAZY_PATH="$HOME/.local/share/nvim/lazy/lazy.nvim"
+rm -rf "$LAZY_PATH"
+git clone https://github.com/folke/lazy.nvim.git "$LAZY_PATH"
+echo "✅ Lazy.nvim freshly installed to $LAZY_PATH"
+
+# ----------------------------
 # SYMLINK CONFIGS
 # ----------------------------
 REPO_DIR="$(pwd)"
-
 echo "🔗 Symlinking Neovim config: ~/.config/nvim -> $REPO_DIR/nvim"
 mkdir -p ~/.config
 ln -sfn "$REPO_DIR/nvim" ~/.config/nvim
 
 echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
 mkdir -p ~/.tmux
-ln -s "$REPO_DIR/tmux" ~/.tmux
+ln -sfn "$REPO_DIR/tmux/tmux.conf" ~/.tmux/tmux.conf
 
 # ----------------------------
 # INSTALL TPM (Tmux Plugin Manager)
@@ -169,16 +183,14 @@ fi
 # INSTALL TMUX PLUGINS
 # ----------------------------
 echo "📜 Installing tmux plugins using TPM..."
-tmux start-server
-tmux new-session -d
-~/.tmux/plugins/tpm/bin/install_plugins
-tmux kill-server
+tmux new-session -d -s plugin-install-session "sleep 1; tmux source-file ~/.tmux.conf; ~/.tmux/plugins/tpm/bin/install_plugins; sleep 2"
+sleep 4
+tmux kill-session -t plugin-install-session 2>/dev/null || true
 echo "✅ tmux plugins installed!"
 
 # ----------------------------
-# FINAL: Reload ~/.bashrc
+# FINAL MESSAGE
 # ----------------------------
-echo "🔄 Sourcing ~/.bashrc to activate changes..."
-source ~/.bashrc
-
+echo "🔄 Please run 'source ~/.bashrc' or restart your terminal to activate all changes."
 echo "🎉 Full development environment setup is complete!"
+

@@ -6,5 +6,6 @@
 sudo chmod +x ./install.sh
 sudo ./install.sh
 sudo source ~/.bashrc
+sudo tmux source ~/.tmux/tmux.conf
 pip install neovim debugpy # inside venv, needed for debug
 ```
