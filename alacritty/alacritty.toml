@@ -1,0 +1,69 @@
+# Alacritty Configuration (TOML format)
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[window]
+opacity = 1.0
+dynamic_padding = true
+startup_mode = "Maximized"
+
+[window.padding]
+x = 8
+y = 6
+
+[colors.primary]
+background = "#0d1117"
+foreground = "#c9d1d9"
+
+[colors.cursor]
+text = "#0d1117"
+cursor = "#c9d1d9"
+
+[colors.normal]
+black   = "#484f58"
+red     = "#ff7b72"
+green   = "#3fb950"
+yellow  = "#d29922"
+blue    = "#58a6ff"
+magenta = "#bc8cff"
+cyan    = "#39c5cf"
+white   = "#b1bac4"
+
+[colors.bright]
+black   = "#6e7681"
+red     = "#ffa198"
+green   = "#56d364"
+yellow  = "#e3b341"
+blue    = "#79c0ff"
+magenta = "#d2a8ff"
+cyan    = "#56d4dd"
+white   = "#f0f6fc"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+program = "/bin/bash"  # or "/bin/zsh"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Alt"
+action = "ToggleFullscreen"
+

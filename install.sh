@@ -6,7 +6,7 @@ echo "🔧 Updating and upgrading system packages..."
 # sudo apt update && sudo apt upgrade -y
 
 echo "📦 Installing essential development tools..."
-sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip
+sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty
 
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full
@@ -164,6 +164,9 @@ REPO_DIR="$(pwd)"
 echo "🔗 Symlinking Neovim config: ~/.config/nvim -> $REPO_DIR/nvim"
 mkdir -p ~/.config
 ln -sfn "$REPO_DIR/nvim" ~/.config/nvim
+
+echo "🔗 Symlinking Alacritty config: ~/.config/alacritty-> $REPO_DIR/alacritty"
+ln -sfn "$REPO_DIR/alacritty" ~/.config/alacritty
 
 echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
 mkdir -p ~/.tmux
