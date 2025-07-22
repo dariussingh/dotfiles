@@ -172,6 +172,9 @@ echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
 mkdir -p ~/.tmux
 ln -sfn "$REPO_DIR/tmux/tmux.conf" ~/.tmux/tmux.conf
 
+echo 'source-file ~/.tmux/tmux.conf' > ~/.tmux.conf
+echo "~/.tmux.conf has been replaced to source ~/.tmux/tmux.conf"
+
 # ----------------------------
 # INSTALL TPM (Tmux Plugin Manager)
 # ----------------------------
