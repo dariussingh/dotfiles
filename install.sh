@@ -6,10 +6,32 @@ echo "🔧 Updating and upgrading system packages..."
 # sudo apt update && sudo apt upgrade -y
 
 echo "📦 Installing essential development tools..."
-sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty
+sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh
 
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full
+
+# ----------------------------
+# INSTALL UV (Fast Python package/dependency manager)
+# ----------------------------
+echo "[+] Installing uv..."
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+export PATH="$HOME/.local/bin:$PATH"
+if ! grep -q 'uv PATH' ~/.bashrc; then
+  echo 'export PATH="$HOME/.local/bin:$PATH"  # uv PATH' >> ~/.bashrc
+  echo "✅ Added uv path to ~/.bashrc"
+fi
+
+echo "✅ uv version: $(uv --version)"
+
+# Alias pip -> uv pip
+if ! grep -q 'alias pip=' ~/.bashrc; then
+  echo 'alias pip="uv pip"' >> ~/.bashrc
+  echo "✅ Added alias: pip -> uv pip"
+else
+  echo "ℹ️  pip alias already exists in ~/.bashrc, skipping..."
+fi
 
 # ----------------------------
 # INSTALL LAZYGIT
@@ -37,7 +59,7 @@ if ! grep -q '/opt/nvim' ~/.bashrc; then
   echo 'export PATH="$PATH:/opt/nvim"' >>~/.bashrc
   echo "✅ Added /opt/nvim to PATH in ~/.bashrc"
 else
-  echo "ℹ️ /opt/nvim already in PATH"
+  echo "ℹ️  /opt/nvim already in PATH"
 fi
 
 echo "✅ Neovim installed to /opt/nvim/nvim"
@@ -50,7 +72,7 @@ export NVM_DIR="$HOME/.nvm"
 if [ ! -d "$NVM_DIR" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 else
-  echo "ℹ️ NVM already installed, skipping..."
+  echo "ℹ️  NVM already installed, skipping..."
 fi
 
 if ! grep -q 'NVM Configuration' ~/.bashrc; then
@@ -63,7 +85,7 @@ export NVM_DIR="$HOME/.nvm"
 EOF
   echo "✅ NVM setup added to ~/.bashrc"
 else
-  echo "ℹ️ NVM already configured in ~/.bashrc"
+  echo "ℹ️  NVM already configured in ~/.bashrc"
 fi
 
 export NVM_DIR="$HOME/.nvm"
@@ -75,7 +97,7 @@ else
 fi
 
 echo "📥 Installing latest Node.js (LTS) via NVM..."
-nvm install --lts || echo "⚠️ Node.js LTS may already be installed."
+nvm install --lts || echo "⚠️  Node.js LTS may already be installed."
 NODE_LTS_VERSION=$(nvm ls --no-colors | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -1)
 
 if [[ -n "$NODE_LTS_VERSION" ]]; then
@@ -95,9 +117,9 @@ npm install -g @devcontainers/cli
 echo "✅ Dev Containers CLI installed: $(devcontainers --version)"
 
 # ----------------------------
-# VIRTUALENV HELPERS
+# VIRTUALENV HELPERS (using uv)
 # ----------------------------
-echo "🛠️ Adding virtualenv helpers to ~/.bashrc..."
+echo "🛠️  Adding virtualenv helpers to ~/.bashrc..."
 VENV_HELPERS='
 # ----------------------------
 # VIRTUALENV HELPERS
@@ -106,7 +128,7 @@ mkvirtualenv() {
   if [ -z "$1" ]; then
     echo "Usage: mkvirtualenv <env_name>"
   else
-    python3 -m venv "$HOME/.virtualenvs/$1"
+    uv venv "$HOME/.virtualenvs/$1"
     echo "✅ Virtualenv created at ~/.virtualenvs/$1"
     echo "💡 To activate it, run: workon $1"
   fi
@@ -135,14 +157,14 @@ if ! grep -q 'VIRTUALENV HELPERS' ~/.bashrc; then
   echo "$VENV_HELPERS" >>~/.bashrc
   echo "✅ Virtualenv helpers added to ~/.bashrc"
 else
-  echo "ℹ️ Virtualenv helpers already exist in ~/.bashrc, skipping..."
+  echo "ℹ️  Virtualenv helpers already exist in ~/.bashrc, skipping..."
 fi
 
 echo "📁 Creating ~/.virtualenvs directory..."
 mkdir -p ~/.virtualenvs
 
 echo "🌱 Creating base virtual environment: ~/.virtualenvs/base..."
-python3 -m venv ~/.virtualenvs/base
+uv venv ~/.virtualenvs/base
 echo "✅ Base virtualenv created."
 echo "💡 To activate it now, run: workon base"
 
@@ -150,7 +172,7 @@ echo "💡 To activate it now, run: workon base"
 # Install Neovim Python + Node support
 # ----------------------------
 echo "🐍 Installing neovim Python module in base virtualenv..."
-~/.virtualenvs/base/bin/pip install -U pip neovim
+~/.virtualenvs/base/bin/uv pip install -U neovim
 
 echo "🟢 Installing neovim Node.js package..."
 npm install -g neovim
@@ -172,7 +194,7 @@ echo "🔗 Symlinking Neovim config: ~/.config/nvim -> $REPO_DIR/nvim"
 mkdir -p ~/.config
 ln -sfn "$REPO_DIR/nvim" ~/.config/nvim
 
-echo "🔗 Symlinking Alacritty config: ~/.config/alacritty-> $REPO_DIR/alacritty"
+echo "🔗 Symlinking Alacritty config: ~/.config/alacritty -> $REPO_DIR/alacritty"
 ln -sfn "$REPO_DIR/alacritty" ~/.config/alacritty
 
 echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
@@ -189,7 +211,7 @@ echo "🔌 Installing TPM (Tmux Plugin Manager)..."
 if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 else
-  echo "ℹ️ TPM already exists, skipping..."
+  echo "ℹ️  TPM already exists, skipping..."
 fi
 
 # ----------------------------
