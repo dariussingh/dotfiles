@@ -1,17 +1,18 @@
--- lua/plugins/markdown-preview.lua
 return {
   {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
-    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-    config = function()
+    build = function()
+      vim.fn["mkdp#util#install"]() -- built-in installer (no npm/yarn required)
+    end,
+    init = function()
       vim.g.mkdp_filetypes = { "markdown" }
-      vim.g.mkdp_theme = "dark" -- change to "light" if you prefer
+      vim.g.mkdp_theme = "dark" -- optional: dark mode
     end,
     keys = {
-      { "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", desc = "Toggle Markdown Preview" },
-    },
-  },
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle Markdown Preview" }
+    }
+  }
 }
 
