@@ -9,7 +9,7 @@ echo "📦 Installing essential development tools..."
 sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh
 
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
-sudo apt install -y xclip ripgrep fd-find fzf ruby-full
+sudo apt install -y xclip ripgrep fd-find fzf ruby-full build-essential
 
 # ----------------------------
 # INSTALL UV (Fast Python package/dependency manager)
@@ -222,6 +222,29 @@ tmux new-session -d -s plugin-install-session "sleep 1; tmux source-file ~/.tmux
 sleep 4
 tmux kill-session -t plugin-install-session 2>/dev/null || true
 echo "✅ tmux plugins installed!"
+
+# ----------------------------
+# ADD DISPLAY SERVER CHECK TO ~/.bashrc
+# ----------------------------
+DISPLAY_CHECK='
+# ----------------------------
+# DISPLAY SERVER CHECK
+# ----------------------------
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    echo -e "\e[32mYou are running: Wayland\e[0m"
+elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    echo -e "\e[31mYou are running: X11 (Xorg)\e[0m"
+else
+    echo -e "\e[33mDisplay server: Unknown ($XDG_SESSION_TYPE)\e[0m"
+fi
+'
+
+if ! grep -q 'DISPLAY SERVER CHECK' ~/.bashrc; then
+  echo "$DISPLAY_CHECK" >>~/.bashrc
+  echo "✅ Display server check added to ~/.bashrc"
+else
+  echo "ℹ️  Display server check already exists in ~/.bashrc, skipping..."
+fi
 
 # ----------------------------
 # FINAL MESSAGE
