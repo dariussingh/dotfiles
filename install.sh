@@ -172,7 +172,7 @@ echo "💡 To activate it now, run: workon base"
 # Install Neovim Python + Node support
 # ----------------------------
 echo "🐍 Installing neovim Python module in base virtualenv..."
-~/.virtualenvs/base/bin/uv pip install -U neovim
+uv pip install -U neovim --python ~/.virtualenvs/base/bin/python
 
 echo "🟢 Installing neovim Node.js package..."
 npm install -g neovim
