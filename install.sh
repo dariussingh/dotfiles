@@ -114,7 +114,7 @@ fi
 # ----------------------------
 echo "📦 Installing Dev Containers CLI..."
 npm install -g @devcontainers/cli
-echo "✅ Dev Containers CLI installed: $(devcontainers --version)"
+echo "✅ Dev Containers CLI installed: $(devcontainer --version)"
 
 # ----------------------------
 # VIRTUALENV HELPERS (using uv)
