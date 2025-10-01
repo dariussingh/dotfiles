@@ -1,0 +1,46 @@
+{ config, pkgs, ... }:
+
+{
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      ##### --- Reload Config --- #####
+      unbind r
+      bind r source-file ~/.tmux.conf \; display-message "Config reloaded!"
+
+      ##### --- Terminal Settings --- #####
+      set -g default-terminal "xterm-256color"
+      set -as terminal-overrides ',xterm-256color:RGB'
+
+      ##### --- Mouse Support --- #####
+      set -g mouse on
+
+      ##### --- Vi Mode --- #####
+      set-window-option -g mode-keys vi
+      set-option -g mode-keys vi
+
+      ##### --- Window Navigation --- #####
+      bind-key -n M-h previous-window
+      bind-key -n M-j previous-window
+      bind-key -n M-l next-window
+      bind-key -n M-k next-window
+
+      ##### --- Vim-aware Pane Navigation --- #####
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ]* +(n?vim|vimx?)$'"
+
+      bind -n C-h if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+      bind -n C-j if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+      bind -n C-k if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+      bind -n C-l if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+
+      ##### --- Plugin List --- #####
+      set -g @plugin 'tmux-plugins/tpm'
+      set -g @plugin 'tmux-plugins/tmux-sensible'
+      set -g @plugin 'christoomey/vim-tmux-navigator'
+      set -g @plugin 'tmux-plugins/tmux-logging'
+
+      ##### --- Initialize TPM --- #####
+      run '~/.tmux/plugins/tpm/tpm'
+    '';
+  };
+}
