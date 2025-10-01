@@ -14,6 +14,7 @@ pip install neovim debugpy # inside venv, needed for debug
 
 ### NixOS
 
+- Setup nvidia and nixos: [Guide](https://nixos.wiki/wiki/Nvidia)
 - How to setup LazyVim with Nixos: [Recipe](https://github.com/LazyVim/LazyVim/discussions/1972)
 - nvim dotfiles are shared for ubuntu and nixos but tmux and alacritty dotfiles for nixos are in nix.
 - rm -rf ~/.config/alacritty/
