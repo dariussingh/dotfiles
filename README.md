@@ -1,4 +1,4 @@
-# nvim tmux dotfiles
+# Config files
 
 ## Setup 
 
@@ -14,8 +14,7 @@ pip install neovim debugpy # inside venv, needed for debug
 
 ### NixOS
 
-- Setup nvidia and nixos: [Guide](https://nixos.wiki/wiki/Nvidia)
-- How to setup LazyVim with Nixos: [Recipe](https://github.com/LazyVim/LazyVim/discussions/1972)
+
 - Setup:
   ```bash
   rm -rf ~/.config/alacritty/
@@ -34,4 +33,8 @@ pip install neovim debugpy # inside venv, needed for debug
   sudo nix-collect-garbage --delete-older-than 7d
 
   ```
+
+- References
+  - Setup nvidia and nixos: [Guide](https://nixos.wiki/wiki/Nvidia)
+  - How to setup LazyVim with Nixos: [Recipe](https://github.com/LazyVim/LazyVim/discussions/1972)
 
