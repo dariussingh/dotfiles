@@ -29,8 +29,8 @@
     };
 
 
-  home.file.".tmux" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux";
+  home.file.".tmux/tmux.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux/tmux.conf";
     };
 
 }
