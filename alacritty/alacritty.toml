@@ -60,7 +60,7 @@ history = 10000
 multiplier = 3
 
 [shell]
-program = "/bin/bash"  # or "/bin/zsh"
+program = "/etc/profiles/per-user/darius/bin/bash"
 
 [[keyboard.bindings]]
 key = "Return"

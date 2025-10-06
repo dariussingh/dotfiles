@@ -4,6 +4,8 @@
   imports = [
     ./packages.nix
     ./gnome.nix
+    ./alacritty.nix
+    ./tmux.nix
   ];
 
   fonts.fontconfig.enable = true;

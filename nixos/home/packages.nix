@@ -8,8 +8,9 @@
     python3
     python3Packages.pip
     ruby
-    tmux       # Keep tmux for configuration, but it's also in systemPackages
-    git        # Keep git for configuration, but it's also in systemPackages
+    tmux
+    git
+    alacritty
     gh
     lazygit
     vlc
@@ -17,5 +18,20 @@
     gnomeExtensions.workspace-indicator
     nerd-fonts.jetbrains-mono
   ];
+
+  # Add dotfile symlinks
+  home.file.".config/nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/nvim";
+    };
+
+  home.file.".config/alacritty/alacritty.toml" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/alacritty/alacritty.toml";
+    };
+
+
+  home.file.".tmux" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux";
+    };
+
 }
 
