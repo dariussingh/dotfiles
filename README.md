@@ -27,6 +27,8 @@ pip install neovim debugpy # inside venv, needed for debug
   # Press Prefix (Ctrl+b), then type:
   :source-file ~/.tmux/tmux.conf
   sudo tmux source ~/.tmux/tmux.conf
+  # if markdown-preview does not work
+  cd ~/.local/share/nvim/lazy/markdown-preview.nvim/app && ./install.sh
   ```
 - Garbage Collection of generations
   ```bash

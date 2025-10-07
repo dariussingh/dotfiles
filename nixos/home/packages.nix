@@ -18,6 +18,7 @@
     gnomeExtensions.workspace-indicator
     nerd-fonts.jetbrains-mono
     rclone
+    sshfs
   ];
 
   # Add dotfile symlinks
