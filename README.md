@@ -37,6 +37,5 @@ pip install neovim debugpy # inside venv, needed for debug
 - References
   - Setup nvidia and nixos: [Guide](https://nixos.wiki/wiki/Nvidia)
   - How to setup LazyVim with Nixos: [Recipe](https://github.com/LazyVim/LazyVim/discussions/1972)
-  - How to setup devenv: [blog](https://cloudnativeengineer.substack.com/p/effortless-python-development-with-nix)
 
 
