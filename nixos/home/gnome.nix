@@ -38,13 +38,46 @@
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
       ];
     };
     
+    # Alacritty
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "Open Alacritty (Copilot Key)";
-      command = "${pkgs.alacritty}/bin/alacritty"; # Use the alacritty package path
+      command = "${pkgs.alacritty}/bin/alacritty";
       binding = "<Shift><Super>TouchpadOff"; # Left-Shift + Left-Meta (Super) + F23
+    };
+
+    # File Explorer
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "Open File Explorer";
+      command = "${pkgs.nautilus}/bin/nautilus";
+      binding = "<Super>e";
+    };
+
+    # VSCode
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      name = "Open VSCode";
+      command = "${pkgs.vscode}/bin/code";
+      binding = "<Super>period"; # "." is "period"
+    };
+
+    # Settings
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      name = "Open Settings";
+      command = "gnome-control-center";
+      binding = "<Super><Shift>p";
+    };
+
+    # Brave
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+      name = "Open Brave";
+      command = "${pkgs.brave}/bin/brave";
+      binding = "<Super>b";
     };
   };
 }
