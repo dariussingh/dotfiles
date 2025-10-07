@@ -1,5 +1,14 @@
+# devenv.yaml (Corrected structure)
 inputs:
   nixpkgs:
     url: github:NixOS/nixpkgs/nixpkgs-unstable
   nixpkgs-python:
     url: github:cachix/nixpkgs-python
+
+allowUnfree: true
+cudaSupport: true
+cudaCapabilities: ["12.8"]
+
+# If you have more than one devenv you can merge them
+#imports:
+# - ./backend

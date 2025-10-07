@@ -1,8 +1,10 @@
 { pkgs, ... }:
 
 {
-  packages = [ 
-    # pkgs.git 
+  packages = [
+    pkgs.cudaPackages.cudatoolkit
+    pkgs.cudaPackages.cudnn
+    pkgs.python312Packages.torch
   ];
 
   languages.python.enable = true;
