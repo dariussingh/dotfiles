@@ -32,8 +32,12 @@ pip install neovim debugpy # inside venv, needed for debug
   ```
 - Garbage Collection of generations
   ```bash
-  sudo nix-collect-garbage --delete-older-than 7d
-
+    # Keep the last 4 generations for the current user
+    nix-env --delete-generations 4
+    # Delete system generations
+    sudo nix-env -p /nix/var/nix/profiles/system --delete-generations 4
+    # Garbage collect everything unreferenced
+    sudo nix-collect-garbage -d
   ```
 
 - References
