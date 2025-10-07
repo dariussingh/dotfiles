@@ -1,19 +1,45 @@
-{ pkgs, ... }:
-
 {
-  packages = [
-    pkgs.cudaPackages.cudatoolkit
-    pkgs.cudaPackages.cudnn
-    pkgs.python312Packages.torch
+  pkgs,
+  lib,
+  ...
+}:
+let
+  buildInputs = with pkgs; [
+    cudaPackages.cuda_cudart
+    cudaPackages.cudatoolkit
+    cudaPackages.cudnn
+    stdenv.cc.cc
+    libuv
+    zlib
+  ];
+in
+{
+  packages = with pkgs; [
+    cudaPackages.cuda_nvcc
   ];
 
-  languages.python.enable = true;
-  languages.python.version = "3.12.0";
-  languages.python.venv.enable = true;
+  env = {
+    LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}:/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+    XLA_FLAGS = "--xla_gpu_cuda_data_dir=${pkgs.cudaPackages.cudatoolkit}"; # For tensorflow with GPU support
+    CUDA_PATH = pkgs.cudaPackages.cudatoolkit;
+  };
 
-  # uv
-  languages.python.uv.enable = true;
+  languages.python = {
+    enable = true;
+    version = "3.12.0";
+    uv = {
+      enable = true;
+      sync.enable = true;
+    };
+  };
 
-  # poetry
-  languages.python.poetry.enable = false;
+  scripts.devenv_startup.exec = "uv run python devenv_startup.py";
+
+  enterShell = ''
+    . .devenv/state/venv/bin/activate
+    nvcc -V
+    devenv_startup 
+  '';
 }
+
+

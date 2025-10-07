@@ -4,15 +4,12 @@
 ```bash
 # in project dir
 devenv init
-# replace devenv.nix with current file
-# replace devenv.yaml with repo file
+# replace devenv.nix, devenv.yaml and devenv_startup.py in project dir
 direnv allow # devenv shell -- --print-build-logs --verbose
 uv sync
-# pip install -r requirements.txt
-# poetry install 
-
 ```
 
 ## References
-  - How to setup devenv: [blog](https://cloudnativeengineer.substack.com/p/effortless-python-development-with-nix)
+- How to setup devenv: [blog](https://cloudnativeengineer.substack.com/p/effortless-python-development-with-nix)
+- Devenv with cuda: [github](https://github.com/clementpoiret/nix-python-devenv/tree/cuda)
 

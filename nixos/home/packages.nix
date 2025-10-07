@@ -17,6 +17,7 @@
     libreoffice
     gnomeExtensions.workspace-indicator
     nerd-fonts.jetbrains-mono
+    rclone
   ];
 
   # Add dotfile symlinks
