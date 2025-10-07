@@ -18,6 +18,11 @@
   # Shell and Git moved here from the old configuration.
   programs.bash.enable = true;
 
+  # direnv
+  programs.direnv = {
+    enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "dariussingh";
