@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # GNOME Shell extensions (dconf settings)
-  xdg.configFile."gnome-shell/extensions".text = ''
-    # Workspace indicator extension enabled
-  '';
-
   dconf.settings = {
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
