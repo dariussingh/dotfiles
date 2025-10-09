@@ -19,6 +19,14 @@
     nerd-fonts.jetbrains-mono
     rclone
     sshfs
+    poppler-utils
+    ripgrep
+    chafa
+    imagemagick
+    ffmpegthumbnailer
+    epub-thumbnailer
+    fontpreview
+    ffmpegthumbnailer
   ];
 
   # Add dotfile symlinks
