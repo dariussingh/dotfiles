@@ -5,8 +5,8 @@
 ### Ubuntu
 
 ```bash
-sudo chmod +x ./install.sh
-sudo ./install.sh
+sudo chmod +x ./install_ubuntu.sh
+sudo ./install_ubuntu.sh
 sudo source ~/.bashrc
 sudo tmux source ~/.tmux/tmux.conf
 pip install neovim debugpy # inside venv, needed for debug

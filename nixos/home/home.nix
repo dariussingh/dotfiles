@@ -47,4 +47,8 @@
   
   # Firefox moved to Home Manager as it's a user application
   programs.firefox.enable = true;
+
+  home.file.".tmux.conf" = {
+    text = "source-file ~/.tmux/tmux.conf";
+  };
 }
