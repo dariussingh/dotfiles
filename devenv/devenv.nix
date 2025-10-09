@@ -11,6 +11,8 @@ let
     stdenv.cc.cc
     libuv
     zlib
+    libGL
+    glib
   ];
 in
 {
@@ -38,8 +40,7 @@ in
   enterShell = ''
     . .devenv/state/venv/bin/activate
     nvcc -V
-    devenv_startup 
+    devenv_startup
   '';
 }
-
 
