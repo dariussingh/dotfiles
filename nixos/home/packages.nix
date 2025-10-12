@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     brave
     discord
-    vscode
     python3
     python3Packages.pip
     ruby
@@ -43,5 +42,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux/tmux.conf";
     };
 
+  # Add vscode
+  programs.vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
+    };
 }
 
