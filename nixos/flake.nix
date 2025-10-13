@@ -4,10 +4,12 @@
   # Define all dependencies (inputs)
   inputs = {
     # 1. Main NixOS/Nixpkgs channel
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05"; 
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05"; # stable
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # unstable
 
     # 2. Home Manager
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    # home-manager.url = "github:nix-community/home-manager/release-25.05"; # stable
+    home-manager.url = "github:nix-community/home-manager/master"; # unstable
     home-manager.inputs.nixpkgs.follows = "nixpkgs"; 
     
     # 3. Add devenv 🚀
