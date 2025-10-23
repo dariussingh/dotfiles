@@ -31,7 +31,7 @@
     alias sync-obsidian="cd ~/Development/Obsidian && ./sync_obsidian.sh"
     alias mount-s24="cd ~/Development && sshfs i2v@192.168.2.24:/media/8tb_drive s24_8tb_drive"
     alias mount-s21="cd ~/Development && sshfs i2v@192.168.2.21:/media/i2v-admin/2tb_drive ./s21_2tb_drive/"
-    alias mount-datacrunch="cd ~/Development && sshfs root@192.168.2.21:/media ./datacrunch_drive"
+    alias mount-datacrunch="cd ~/Development && sshfs root@31.22.104.149:/media ./datacrunch_drive"
   '';
 
   # direnv
