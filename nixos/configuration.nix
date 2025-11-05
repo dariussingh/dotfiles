@@ -25,7 +25,10 @@
 
   # Enable Flakes and nix-command
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+
+  # Enable Docker 
+  virtualisation.docker.enable = true; 
+
   # Set the system state version
   system.stateVersion = "25.05";
 }
