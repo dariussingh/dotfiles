@@ -5,7 +5,7 @@ return {
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim", -- optional, for template selection
+    "nvim-telescope/telescope.nvim", -- for pickers
   },
   opts = {
     workspaces = {
@@ -46,14 +46,37 @@ return {
 
     obsidian.setup(opts)
 
-    -- Keymaps
     local map = vim.keymap.set
-    map("n", "<leader>oo", "<cmd>ObsidianOpen<cr>", { desc = "Open Obsidian app" })
-    map("n", "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "New note" })
-    map("n", "<leader>ot", "<cmd>ObsidianToday<cr>", { desc = "Open today's daily note" })
-    map("n", "<leader>oy", "<cmd>ObsidianYesterday<cr>", { desc = "Open yesterday's daily note" })
 
-    -- Custom: Create note from template
+    ---------------------------------------------------------------------------
+    -- 🗂️  Obsidian Command Keymaps (flat, unique, all under <leader>o)
+    ---------------------------------------------------------------------------
+    map("n", "<leader>oo", "<cmd>ObsidianOpen<cr>", { desc = "Open in Obsidian app" })
+    map("n", "<leader>on", "<cmd>ObsidianNew<cr>", { desc = "New note" })
+    map("n", "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", { desc = "Quick switch note" })
+    map("n", "<leader>of", "<cmd>ObsidianFollowLink<cr>", { desc = "Follow link under cursor" })
+    map("n", "<leader>ob", "<cmd>ObsidianBacklinks<cr>", { desc = "Show backlinks" })
+    map("n", "<leader>og", "<cmd>ObsidianTags<cr>", { desc = "Search by tags" })
+    map("n", "<leader>od", "<cmd>ObsidianToday<cr>", { desc = "Open today's note" })
+    map("n", "<leader>oy", "<cmd>ObsidianYesterday<cr>", { desc = "Open yesterday's note" })
+    map("n", "<leader>om", "<cmd>ObsidianTomorrow<cr>", { desc = "Open tomorrow's note" })
+    map("n", "<leader>oa", "<cmd>ObsidianDailies<cr>", { desc = "List daily notes" })
+    map("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>", { desc = "Insert template" })
+    map("n", "<leader>os", "<cmd>ObsidianSearch<cr>", { desc = "Search notes" })
+    map("v", "<leader>ol", "<cmd>ObsidianLink<cr>", { desc = "Link selection to existing note" })
+    map("v", "<leader>ok", "<cmd>ObsidianLinkNew<cr>", { desc = "Create & link new note" })
+    map("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "List all links in buffer" })
+    map("n", "<leader>ox", "<cmd>ObsidianExtractNote<cr>", { desc = "Extract selection to note" })
+    map("n", "<leader>ow", "<cmd>ObsidianWorkspace<cr>", { desc = "Switch workspace" })
+    map("n", "<leader>oi", "<cmd>ObsidianPasteImg<cr>", { desc = "Paste image from clipboard" })
+    map("n", "<leader>or", "<cmd>ObsidianRename<cr>", { desc = "Rename note" })
+    map("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<cr>", { desc = "Toggle checkbox" })
+    map("n", "<leader>oe", "<cmd>ObsidianNewFromTemplate<cr>", { desc = "New note from template" })
+    map("n", "<leader>oT", "<cmd>ObsidianTOC<cr>", { desc = "Table of contents" })
+
+    ---------------------------------------------------------------------------
+    -- 🧩 Custom: Manual create note from template
+    ---------------------------------------------------------------------------
     local function create_note_from_template()
       local vault_path = expand_home(opts.workspaces[1].path)
       local templates_dir = Path:new(vault_path) / opts.templates.folder
@@ -76,23 +99,16 @@ return {
         if choice then
           vim.ui.input({ prompt = "New note name: " }, function(note_name)
             if note_name and #note_name > 0 then
-              -- Define new note path
               local note_path = Path:new(vault_path) / (note_name .. ".md")
-
-              -- Prevent overwriting an existing note
               if note_path:exists() then
                 vim.notify("Note already exists: " .. tostring(note_path), vim.log.levels.ERROR)
                 return
               end
 
-              -- Read template content
               local template_path = tostring(templates_dir / choice)
               local template_content = Path:new(template_path):read()
 
-              -- Write template into new note
               note_path:write(template_content, "w")
-
-              -- Open the new note
               vim.cmd("edit " .. tostring(note_path))
             end
           end)
@@ -100,7 +116,8 @@ return {
       end)
     end
 
-    map("n", "<leader>oc", create_note_from_template, { desc = "Create note from template" })
+    -- Custom function mapped separately to avoid overlap
+    map("n", "<leader>oC", create_note_from_template, { desc = "Create note from template (custom)" })
   end,
 }
 
