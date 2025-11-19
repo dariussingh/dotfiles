@@ -56,6 +56,8 @@
     fzf
     fd
     neovim
+    nettools
+    psmisc
   ];
 
   fonts.fontDir.enable = true;
@@ -69,4 +71,16 @@
     curl
     openssl
   ];
+  # Enable OpenSSH
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
+
+  # Open SSH port in firewall
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
 }

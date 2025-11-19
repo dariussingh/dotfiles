@@ -27,7 +27,6 @@
     fontpreview
     ffmpegthumbnailer
     ffmpeg
-    psmisc
   ];
 
   # Add dotfile symlinks
