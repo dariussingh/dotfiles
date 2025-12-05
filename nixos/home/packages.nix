@@ -27,6 +27,7 @@
     fontpreview
     ffmpegthumbnailer
     ffmpeg
+    remmina
   ];
 
   # Add dotfile symlinks
