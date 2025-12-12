@@ -28,6 +28,7 @@
     ffmpegthumbnailer
     ffmpeg
     remmina
+    claude-code
   ];
 
   # Add dotfile symlinks
