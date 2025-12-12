@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, home-manager, llm-agents, ... }:
 
 {
   imports = [
@@ -15,6 +15,11 @@
     {
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "bak";
+    
+      home-manager.extraSpecialArgs = {
+        inherit llm-agents;
+      };
+
       # Point to the user's home-manager entry file
       home-manager.users.darius = import ./home/home.nix;
     }

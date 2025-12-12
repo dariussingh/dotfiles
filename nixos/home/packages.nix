@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, llm-agents, ... }:
 
 {
   home.packages = with pkgs; [
@@ -28,7 +28,7 @@
     ffmpegthumbnailer
     ffmpeg
     remmina
-    claude-code
+    llm-agents.packages.${pkgs.system}.claude-code
   ];
 
   # Add dotfile symlinks

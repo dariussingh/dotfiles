@@ -14,10 +14,13 @@
     
     # 3. Add devenv 🚀
     devenv.url = "github:cachix/devenv";
+
+    # 4. AI tools
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   # Define what the flake produces (outputs)
-  outputs = { self, nixpkgs, home-manager, devenv, ... }: {
+  outputs = { self, nixpkgs, home-manager, devenv, llm-agents, ... }: {
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux"; # IMPORTANT: Adjust for your architecture if not x86_64
@@ -40,7 +43,7 @@
       
       # Explicitly pass the home-manager input to the configuration file
       specialArgs = {
-        inherit home-manager;
+        inherit home-manager llm-agents;
       };
     };
   };
