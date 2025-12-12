@@ -11,3 +11,6 @@ vim.keymap.set("n", "<F12>", vim.lsp.buf.definition, { desc = "Go to Definition 
 vim.keymap.set("n", "<leader>o", "", { desc = "Obsidian" })
 -- Markdown-preview
 vim.keymap.set("n", "<leader>m", "", { desc = "Markdown" })
+-- Git (lazygit for local, octo for GitHub)
+vim.keymap.set("n", "<leader>g", "", { desc = "Git" })
+vim.keymap.set("n", "<leader>gh", "", { desc = "GitHub" })
