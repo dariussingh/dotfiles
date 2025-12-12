@@ -4,7 +4,7 @@
 ```bash
 # in project dir
 devenv init
-# replace devenv.nix, devenv.yaml and devenv_startup.py in project dir
+# replace pyproject.toml, devenv.nix, devenv.yaml and devenv_startup.py in project dir
 direnv allow # devenv shell -- --print-build-logs --verbose
 uv sync
 ```
