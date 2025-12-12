@@ -11,6 +11,7 @@ sudo apt install -y python3-pip python3-venv tmux git curl software-properties-c
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full build-essential
 
+
 # ----------------------------
 # INSTALL UV (Fast Python package/dependency manager)
 # ----------------------------
@@ -176,6 +177,30 @@ uv pip install -U neovim --python ~/.virtualenvs/base/bin/python
 
 echo "🟢 Installing neovim Node.js package..."
 npm install -g neovim
+
+# ----------------------------
+# INSTALL CLAUDE CODE CLI (npm)
+# ----------------------------
+echo "🤖 Installing Claude Code CLI..."
+
+# Create npm global directory to avoid sudo installs (ITECS recommended)
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+
+# Ensure ~/.npm-global/bin is in PATH
+if ! grep -q 'npm-global' ~/.bashrc; then
+  echo 'export PATH="$HOME/.npm-global/bin:$PATH"  # npm-global' >> ~/.bashrc
+  echo "✅ Added ~/.npm-global/bin to PATH in ~/.bashrc"
+fi
+
+# Reload PATH
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+echo "📦 Installing Claude Code CLI globally..."
+npm install -g @anthropic-ai/claude-code
+
+echo "✅ Claude Code installed: $(claude --version 2>/dev/null || echo 'installed')"
+
 
 # ----------------------------
 # FORCE INSTALL Lazy.nvim PLUGIN MANAGER
