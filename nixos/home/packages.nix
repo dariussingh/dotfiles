@@ -62,6 +62,7 @@
         gnumake
         docker
         docker-compose
+        devcontainer
         git
         nodejs_22
         live-server
