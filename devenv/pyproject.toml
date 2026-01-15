@@ -14,5 +14,11 @@ dependencies = [
   "torchvision",
   "torchaudio",
   "ultralytics",
+  "debugpy",
+  "neovim",
 ]
+
+[tool.setuptools]
+packages = []
+
 
