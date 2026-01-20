@@ -13,6 +13,7 @@
     gh
     lazygit
     vlc
+    devcontainer
     libreoffice
     gnomeExtensions.workspace-indicator
     nerd-fonts.jetbrains-mono
@@ -29,6 +30,7 @@
     ffmpeg
     remmina
     llm-agents.packages.${pkgs.system}.claude-code
+    llm-agents.packages.${pkgs.system}.claude-code-router
   ];
 
   # Add dotfile symlinks
