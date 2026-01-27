@@ -68,7 +68,10 @@ return {
         dap_extra.config()
       end
       -- Add your additional config here (for example: load_launchjs for python adapters)
-      require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" }, python = { "python" } })
+      -- Wrap in pcall to avoid errors when launch.json is empty or invalid
+      pcall(function()
+        require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" }, python = { "python" } })
+      end)
     end,
   },
   -- Add dap-python for python debugging
