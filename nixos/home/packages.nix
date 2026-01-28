@@ -28,6 +28,7 @@
     fontpreview
     ffmpegthumbnailer
     ffmpeg
+    zip
     remmina
     llm-agents.packages.${pkgs.system}.claude-code
     llm-agents.packages.${pkgs.system}.claude-code-router
