@@ -259,24 +259,6 @@ return {
   config = function(_, opts)
     require("octo").setup(opts)
 
-    -- Register which-key group labels
-    local wk = require("which-key")
-    wk.add({
-      { "<leader>gh", group = "GitHub" },
-      { "<leader>ghi", group = "Issues" },
-      { "<leader>ghp", group = "Pull Requests" },
-      { "<leader>ghr", group = "Reviews" },
-      { "<leader>ghv", group = "Reviewers" },
-      { "<leader>ghc", group = "Comments" },
-      { "<leader>ght", group = "Threads" },
-      { "<leader>ghl", group = "Labels" },
-      { "<leader>gha", group = "Assignees" },
-      { "<leader>ghe", group = "Reactions" },
-      { "<leader>ghg", group = "Gists" },
-      { "<leader>ghR", group = "Repo" },
-      { "<leader>ghk", group = "Cards" },
-    })
-
     -- Set up custom highlights to match your colorscheme
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "*",
