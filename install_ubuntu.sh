@@ -226,6 +226,15 @@ echo "🔗 Symlinking tmux config: ~/.tmux -> $REPO_DIR/tmux"
 mkdir -p ~/.tmux
 ln -sfn "$REPO_DIR/tmux/tmux.conf" ~/.tmux/tmux.conf
 
+echo "🔗 Symlinking Claude Code skills: ~/.claude/skills -> $REPO_DIR/ai/skills"
+mkdir -p ~/.claude
+ln -sfn "$REPO_DIR/ai/skills" ~/.claude/skills
+
+echo "🔗 Symlinking OpenCode skills: ~/.config/opencode/skills -> $REPO_DIR/ai/skills"
+mkdir -p ~/.config/opencode
+ln -sfn "$REPO_DIR/ai/skills" ~/.config/opencode/skills
+
+
 echo 'source-file ~/.tmux/tmux.conf' > ~/.tmux.conf
 echo "~/.tmux.conf has been replaced to source ~/.tmux/tmux.conf"
 

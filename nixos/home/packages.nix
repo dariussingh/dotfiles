@@ -48,6 +48,14 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux/tmux.conf";
     };
 
+  home.file.".claude/skills" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
+    };
+
+  home.file.".config/opencode/skills" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
+    };
+
 # Enable vscode with specific dependencies for extensions
   programs.vscode = {
       enable = true;
