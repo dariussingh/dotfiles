@@ -30,14 +30,49 @@ pip install neovim debugpy # inside venv, needed for debug
   # if markdown-preview does not work
   cd ~/.local/share/nvim/lazy/markdown-preview.nvim/app && ./install.sh
   ```
-- Garbage Collection of generations
+- Update Packages
   ```bash
-    # Keep the last 4 generations for the current user
-    nix-env --delete-generations 4
-    # Delete system generations
-    sudo nix-env -p /nix/var/nix/profiles/system --delete-generations 4
-    # Garbage collect everything unreferenced
-    sudo nix-collect-garbage -d
+  cd ~/dotfiles/nixos
+  # Update all flake inputs (nixpkgs, home-manager, etc.)
+  sudo nix flake update
+  # Rebuild system with updated packages
+  sudo nixos-rebuild switch --flake .#nixos
+
+  # Or combine both steps
+  sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos
+
+  # Update specific inputs only
+  sudo nix flake update nixpkgs
+  sudo nix flake update home-manager
+  ```
+
+- Garbage Collection
+  ```bash
+  # Delete all generations older than 7 days
+  sudo nix-collect-garbage --delete-older-than 7d
+
+  # Or delete all old generations except current
+  sudo nix-collect-garbage -d
+
+  # Delete old user profile generations
+  nix-collect-garbage -d
+
+  # Optimize the Nix store (deduplicate files)
+  sudo nix-store --optimise
+
+  # Clean up boot entries after garbage collection
+  sudo nixos-rebuild boot
+  ```
+
+- Maintenance Routine
+  ```bash
+  # Weekly: Update and rebuild
+  cd ~/dotfiles/nixos
+  sudo nix flake update && sudo nixos-rebuild switch --flake .#nixos
+
+  # Monthly: Garbage collect
+  sudo nix-collect-garbage --delete-older-than 30d
+  sudo nix-store --optimise
   ```
 
 - References
