@@ -31,7 +31,7 @@
     zip
     remmina
     llm-agents.packages.${pkgs.system}.claude-code
-    llm-agents.packages.${pkgs.system}.claude-code-router
+    llm-agents.packages.${pkgs.system}.opencode
   ];
 
   # Add dotfile symlinks
