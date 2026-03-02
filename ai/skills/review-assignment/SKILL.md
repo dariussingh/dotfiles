@@ -42,14 +42,21 @@ When reviewing an assignment, always follow these steps:
    - Do **not** drop entries that are missing metrics
 
 7. **Produce a final CSV-style summary**
-   - Output must be in the following format:
-
+   - There must be two outputs
+   - Output1 must be in the following format:
      ```
      name, val_acc, val_precision
      DariusSingh, 80%, 85%
      PersonB, 71%, 76%
      PersonC, , 82%
      PersonD, ,
+     ```
+   - Output2 must be in the following format:
+     ```
+     name, val_precision above 85
+     DariusSingh, yes
+     PersonB, no
+     PersonC, 
      ```
 
 8. **Be explicit about uncertainty**
