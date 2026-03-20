@@ -7,8 +7,9 @@ Two environment templates depending on project needs:
 
 ## Setup
 ```bash
+devenv init
 # copy the relevant template into your project dir
-cp -r ~/dotfiles/devenv/python/. .         # or python-cpp
+cp -r ~/dotfiles/devenv/python-cpp/. .         # or python-cpp
 direnv allow
 ```
 
