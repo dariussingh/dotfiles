@@ -1,136 +1,75 @@
-# SKILL: write-article
-
-## Overview
-Write clear, persuasive, and engaging articles using simplicity, structure, and reader-first thinking.
-
-This skill is based on principles popularized by Scott Adams and focuses on clarity, brevity, and psychological flow.
-
 ---
-
+name: write-article
+description: >
+  Write clear, persuasive, and engaging articles using simplicity, structure, and reader-first thinking.
+  Use this skill whenever the user asks to write, draft, create, or improve an article, blog post, essay, opinion piece, or any long-form written content.
+  Also trigger when the user asks to make writing clearer, more engaging, or more persuasive — even if they don't say "article."
+  Based on principles popularized by Scott Adams: clarity, brevity, and psychological flow.
+---
+ 
+# Write Article
+ 
+Write clear, persuasive, and engaging articles. Every decision prioritizes the reader.
+ 
+---
+ 
 ## Core Principles
-
-### 1. Simplicity wins
-- Simple writing is more persuasive than complex writing  
-- A short, clear argument beats a long, complicated one  
-
-### 2. Remove unnecessary words
-- Cut filler words aggressively  
-- Example: "very happy" → "happy"  
-- Treat every extra word as a cost  
-
-### 3. Write for the reader
-- Focus on what the reader understands and cares about  
-- Not what you want to say  
-
-### 4. Start with curiosity
-- The first sentence must hook attention  
-- If the first line fails, the article fails  
-
+ 
+**Simplicity wins.** Simple writing is more persuasive than complex writing. A short, clear argument beats a long, complicated one.
+ 
+**Remove unnecessary words.** Cut filler aggressively. Treat every extra word as a cost. "Very happy" becomes "happy."
+ 
+**Write for the reader.** Focus on what the reader understands and cares about, not what you want to say.
+ 
+**Start with curiosity.** The first sentence must hook attention. If the first line fails, the article fails.
+ 
 ---
-
-## Writing Style Rules
-
-### 5. Use direct sentences
-- Prefer active voice  
-- Example: "The boy hit the ball" over passive constructions  
-- Easier for the brain to process  
-
-### 6. Keep sentences short
-- Avoid multiple ideas in one sentence  
-- One idea per sentence  
-
-### 7. Use simple vocabulary
-- Aim for sixth-grade level language  
-- Clarity beats sophistication  
-
-### 8. Avoid jargon and fluff
-- No unnecessary adjectives or adverbs  
-- No clichés  
-- No corporate language  
-
-### 9. Brevity equals intelligence
-- Shorter explanations feel smarter  
-- Respect the reader’s time  
-
+ 
+## Style Rules
+ 
+- Use active voice. "The boy hit the ball," not passive constructions.
+- One idea per sentence. Never stack multiple ideas.
+- Aim for sixth-grade vocabulary. Clarity beats sophistication.
+- No jargon, clichés, unnecessary adjectives, adverbs, or corporate language.
+- Shorter explanations feel smarter. Respect the reader's time.
+ 
 ---
-
+ 
 ## Flow and Readability
-
-### 10. Pace and lead the reader
-- Writing is persuasion  
-- Build trust, then guide the reader  
-
-### 11. Maintain rhythm and sound
-- Words should flow smoothly  
-- Avoid awkward or harsh combinations  
-
-### 12. Use visual language
-- Help readers "see" what you mean  
-- Concrete beats abstract  
-
-### 13. Avoid bad word choices
-- Prefer words with positive or neutral feel  
-- Avoid distracting or unpleasant wording  
-
-### 14. Watch associations
-- Do not connect unrelated ideas  
-- Avoid confusing combinations  
-
+ 
+- Build trust, then guide the reader. Writing is persuasion.
+- Words should flow smoothly when read aloud. Avoid harsh combinations.
+- Use concrete, visual language. Help readers "see" what you mean.
+- Prefer words with neutral or positive associations. Avoid distracting wording.
+- Do not connect unrelated ideas in the same sentence.
+ 
 ---
-
+ 
 ## Engagement Techniques
-
-### 15. Evoke emotion
-- Good topics create feelings like:
-  - curiosity  
-  - humor  
-  - surprise  
-  - anger  
-
-### 16. Violate expectations
-- Add something slightly unexpected or bold  
-- Safe writing is forgettable  
-
-### 17. End strong
-- Finish with something:
-  - clever  
-  - surprising  
-  - thought-provoking  
-
+ 
+- Good writing evokes emotion: curiosity, humor, surprise, or anger.
+- Violate expectations somewhere. Safe writing is forgettable.
+- End with something clever, surprising, or thought-provoking. Never fade out.
+ 
 ---
-
-## Mental Models
-
-### 18. Clarity over cleverness
-- Writing is about understanding, not showing off  
-
-### 19. Reader psychology matters
-- People process:
-  - subject first  
-  - action second  
-- Structure sentences accordingly  
-
-### 20. Practice consistently
-- Writing improves with repetition  
-
----
-
+ 
 ## Hard Rules
-
-- Do not use em dash at all  
-- Do not use unnecessary words  
-- Do not confuse the reader  
-- Do not sacrifice clarity for style  
-
+ 
+- **No em dashes.** Ever.
+- No unnecessary words.
+- Never confuse the reader.
+- Never sacrifice clarity for style.
+ 
 ---
-
+ 
 ## Output Checklist
-
-Before finalizing an article:
-
-- Is the first sentence engaging?  
-- Is every sentence necessary?  
-- Are sentences short and clear?  
-- Is the vocabulary simple?  
-- Does it flow smoothly?  
-- Does it end with impact?  
+ 
+Before finalizing, verify:
+ 
+- [ ] Is the first sentence engaging?
+- [ ] Is every sentence necessary?
+- [ ] Are sentences short and clear?
+- [ ] Is the vocabulary simple?
+- [ ] Does it flow smoothly?
+- [ ] Does it end with impact?
+ 

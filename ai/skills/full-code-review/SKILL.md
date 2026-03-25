@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: full-code-review
 description: >
   Expert-level code review, architecture review, test suite review, and code documentation. Use this skill
   whenever the user asks to review code, review tests, review architecture or design, document code, audit
