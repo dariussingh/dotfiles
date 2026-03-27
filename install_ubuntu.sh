@@ -6,7 +6,7 @@ echo "🔧 Updating and upgrading system packages..."
 # sudo apt update && sudo apt upgrade -y
 
 echo "📦 Installing essential development tools..."
-sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh
+sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh pigz
 
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full build-essential
