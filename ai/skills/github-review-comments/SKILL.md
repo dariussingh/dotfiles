@@ -77,7 +77,7 @@ Read `references/line-resolution.md` for renamed files, moved lines, and 422 err
 ```bash
 gh pr comment <PR-number> --body "## 🔍 Reviewed with OpenCode
 
-CRITICAL and HIGH findings from the code review have been posted as inline comments on this PR.
+Please address the following:
 ```
 
 ---
