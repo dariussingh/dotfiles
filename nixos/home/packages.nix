@@ -16,6 +16,7 @@
     devcontainer
     libreoffice
     gnomeExtensions.workspace-indicator
+    gnomeExtensions.advanced-alttab-window-switcher
     nerd-fonts.jetbrains-mono
     rclone
     sshfs
