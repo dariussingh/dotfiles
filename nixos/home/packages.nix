@@ -34,6 +34,7 @@
     remmina
     llm-agents.packages.${pkgs.system}.claude-code
     llm-agents.packages.${pkgs.system}.opencode
+    llm-agents.packages.${pkgs.system}.codex
   ];
 
   # Add dotfile symlinks
@@ -55,6 +56,10 @@
     };
 
   home.file.".config/opencode/skills" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
+    };
+
+  home.file.".codex/skills" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
     };
 
@@ -86,4 +91,3 @@
     ]);
   };
 }
-

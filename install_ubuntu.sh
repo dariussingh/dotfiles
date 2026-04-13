@@ -6,7 +6,7 @@ echo "🔧 Updating and upgrading system packages..."
 # sudo apt update && sudo apt upgrade -y
 
 echo "📦 Installing essential development tools..."
-sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh pigz
+sudo apt install -y python3-pip python3-venv tmux git curl software-properties-common unzip alacritty gh pigz bubblewrap
 
 echo "📦 Installing extra tools for clipboard, search, fuzzy finding..."
 sudo apt install -y xclip ripgrep fd-find fzf ruby-full build-essential
@@ -201,6 +201,10 @@ npm install -g @anthropic-ai/claude-code
 
 echo "✅ Claude Code installed: $(claude --version 2>/dev/null || echo 'installed')"
 
+echo "📦 Installing Codex CLI globally..."
+npm install -g @openai/codex
+echo "✅ Codex installed: $(codex --version 2>/dev/null || echo 'installed')"
+
 
 # ----------------------------
 # FORCE INSTALL Lazy.nvim PLUGIN MANAGER
@@ -233,6 +237,10 @@ ln -sfn "$REPO_DIR/ai/skills" ~/.claude/skills
 echo "🔗 Symlinking OpenCode skills: ~/.config/opencode/skills -> $REPO_DIR/ai/skills"
 mkdir -p ~/.config/opencode
 ln -sfn "$REPO_DIR/ai/skills" ~/.config/opencode/skills
+
+echo "🔗 Symlinking Codex skills: ~/.codex/skills -> $REPO_DIR/ai/skills"
+mkdir -p ~/.codex
+ln -sfn "$REPO_DIR/ai/skills" ~/.codex/skills
 
 
 echo 'source-file ~/.tmux/tmux.conf' > ~/.tmux.conf
@@ -285,4 +293,3 @@ fi
 # ----------------------------
 echo "🔄 Please run 'source ~/.bashrc' or restart your terminal to activate all changes."
 echo "🎉 Full development environment setup is complete!"
-
