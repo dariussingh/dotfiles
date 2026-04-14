@@ -37,6 +37,7 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
       ];
     };
     
@@ -46,6 +47,13 @@
       command = "${pkgs.alacritty}/bin/alacritty";
       binding = "<Shift><Super>TouchpadOff"; # Left-Shift + Left-Meta (Super) + F23
     };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+      name = "Open Alacritty (Menu Key)";
+      command = "${pkgs.alacritty}/bin/alacritty";
+      binding = "Menu";
+    };
+
 
     # File Explorer
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
