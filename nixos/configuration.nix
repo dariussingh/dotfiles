@@ -36,6 +36,10 @@
   hardware.nvidia-container-toolkit.enable = true;
   virtualisation.docker.daemon.settings.features.cdi = true;
 
+  # TeamViewer needs a system-level daemon; installing only the user package
+  # does not create teamviewerd.service.
+  services.teamviewer.enable = true;
+
   # Set the system state version
   system.stateVersion = "25.05";
 }

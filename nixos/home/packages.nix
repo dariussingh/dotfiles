@@ -35,7 +35,6 @@
     llm-agents.packages.${pkgs.system}.claude-code
     llm-agents.packages.${pkgs.system}.opencode
     llm-agents.packages.${pkgs.system}.codex
-    teamviewer
     anydesk
   ];
 
