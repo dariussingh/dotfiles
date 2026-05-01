@@ -3,6 +3,19 @@ return {
   {
     "mfussenegger/nvim-dap",
     -- Add additional keymaps to the default ones
+    opts = function()
+      local dap = require("dap")
+      local codelldb = vim.fn.exepath("codelldb")
+      if codelldb == "" then
+        codelldb = vim.fn.expand("$MASON/bin/codelldb")
+      end
+
+      if vim.fn.executable(codelldb) == 1 and dap.adapters.codelldb then
+        dap.adapters.codelldb.host = "127.0.0.1"
+        dap.adapters.codelldb.executable = dap.adapters.codelldb.executable or {}
+        dap.adapters.codelldb.executable.command = codelldb
+      end
+    end,
     keys = {
       {
         "<F5>",

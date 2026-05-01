@@ -5,7 +5,7 @@ return {
     opts = {
       ensure_installed = {
         "black",
-        "codelldb",
+        "clang-format",
         "debugpy",
         "flake8",
         "isort",
