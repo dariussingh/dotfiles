@@ -69,7 +69,6 @@ in
   ];
 
   env = {
-    LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}:/run/opengl-driver/lib:/run/opengl-driver-32/lib";
     XLA_FLAGS = "--xla_gpu_cuda_data_dir=${pkgs.cudaPackages.cudatoolkit}"; # For tensorflow with GPU support
     CUDA_PATH = pkgs.cudaPackages.cudatoolkit;
   };
@@ -91,7 +90,13 @@ in
     };
   };
 
-  scripts.devenv_startup.exec = "uv run python devenv_startup.py";
+
+  scripts.run-with-cuda-libs.exec = ''
+    export LD_LIBRARY_PATH="${lib.makeLibraryPath buildInputs}:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+    exec "$@"
+  '';
+
+  scripts.devenv_startup.exec = "run-with-cuda-libs uv run python devenv_startup.py";
 
   enterShell = ''
     . .devenv/state/venv/bin/activate
