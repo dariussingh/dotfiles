@@ -1,2 +1,4 @@
 tmux/plugins/
 ai/skills/.system/
+*.nvimlog
+*.codex
