@@ -5,6 +5,8 @@ return {
     opts = {
       ensure_installed = {
         "black",
+        "clang-format",
+        "clangd",
         "codelldb",
         "debugpy",
         "flake8",
@@ -17,5 +19,26 @@ return {
         "stylua",
       },
     },
+  },
+  -- add clangd to lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- clangd will be automatically installed with mason and loaded with lspconfig
+        clangd = {},
+      },
+    },
+  },
+  -- add c and cpp treesitter parsers
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      -- add c and cpp treesitter
+      vim.list_extend(opts.ensure_installed, {
+        "c",
+        "cpp",
+      })
+    end,
   },
 }

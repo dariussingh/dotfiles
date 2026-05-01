@@ -62,15 +62,84 @@ return {
       },
     },
     config = function()
+      local dap = require("dap")
+
+      local function mason_package_path(package)
+        local ok, registry = pcall(require, "mason-registry")
+        if not ok then
+          return nil
+        end
+
+        local ok_pkg, pkg = pcall(registry.get_package, package)
+        if not ok_pkg then
+          return nil
+        end
+
+        if not pkg:is_installed() then
+          return nil
+        end
+
+        return pkg:get_install_path()
+      end
+
+      local function get_codelldb_adapter()
+        local codelldb_path = mason_package_path("codelldb")
+        if not codelldb_path then
+          return nil
+        end
+
+        local adapter = codelldb_path .. "/extension/adapter/codelldb"
+        if vim.fn.has("win32") == 1 then
+          adapter = adapter .. ".exe"
+        end
+
+        return adapter
+      end
+
       -- Call the original config if you want to preserve everything (as loaded by lazy extras)
       local loaded, dap_extra = pcall(require, "lazyvim.plugins.extras.dap.core")
       if loaded and dap_extra and dap_extra.config then
         dap_extra.config()
       end
-      -- Add your additional config here (for example: load_launchjs for python adapters)
+
+      local codelldb_adapter = get_codelldb_adapter()
+      if codelldb_adapter then
+        dap.adapters.codelldb = {
+          type = "server",
+          port = "${port}",
+          executable = {
+            command = codelldb_adapter,
+            args = { "--port", "${port}" },
+          },
+        }
+
+        local cpp_configurations = {
+          {
+            name = "Launch executable",
+            type = "codelldb",
+            request = "launch",
+            program = function()
+              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+          },
+        }
+
+        for _, lang in ipairs({ "c", "cpp" }) do
+          dap.configurations[lang] = cpp_configurations
+        end
+      end
+
+      -- Add your additional config here (for example: load_launchjs for python/cpp adapters)
       -- Wrap in pcall to avoid errors when launch.json is empty or invalid
       pcall(function()
-        require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" }, python = { "python" } })
+        require("dap.ext.vscode").load_launchjs(nil, {
+          codelldb = { "c", "cpp" },
+          debugpy = { "python" },
+          lldb = { "c", "cpp" },
+          python = { "python" },
+        })
       end)
     end,
   },
