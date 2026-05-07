@@ -63,6 +63,13 @@ else
   echo "ℹ️  /opt/nvim already in PATH"
 fi
 
+if ! grep -q '^export EDITOR=nvim$' ~/.bashrc; then
+  echo 'export EDITOR=nvim' >>~/.bashrc
+  echo "✅ Added EDITOR=nvim to ~/.bashrc"
+else
+  echo "ℹ️  EDITOR already set to nvim in ~/.bashrc"
+fi
+
 echo "✅ Neovim installed to /opt/nvim/nvim"
 
 # ----------------------------

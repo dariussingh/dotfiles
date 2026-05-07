@@ -18,6 +18,8 @@
   # Shell and Git moved here from the old configuration.
   programs.bash.enable = true;
   programs.bash.initExtra = ''
+    export EDITOR=nvim
+
     # Detect display server type
     if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
         echo -e "\e[32mYou are running: Wayland\e[0m"
