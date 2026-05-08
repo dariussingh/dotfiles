@@ -34,6 +34,7 @@
     remmina
     llm-agents.packages.${pkgs.system}.claude-code
     llm-agents.packages.${pkgs.system}.opencode
+    tabby-agent
     anydesk
   ];
 
