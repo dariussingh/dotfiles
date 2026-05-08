@@ -16,11 +16,13 @@ return {
       vim.g.tabby_inline_completion_trigger = "auto"
 
       -- accept completion
-      vim.g.tabby_inline_completion_keybinding_accept = "<Tab>"
+      vim.g.tabby_inline_completion_keybinding_accept = "<C-g>"
+      vim.g.tabby_inline_completion_keybinding_accept = "<C-g>"
+
 
       -- trigger/dismiss
       vim.g.tabby_inline_completion_keybinding_trigger_or_dismiss =
-        "<C-\\>"
+        "<C-e>"
     end,
   },
 }
