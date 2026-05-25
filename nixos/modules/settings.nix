@@ -80,7 +80,7 @@
     };
   };
 
-  # Open SSH port in firewall
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # Open SSH and local service ports in firewall
+  networking.firewall.allowedTCPPorts = [ 22 5018 5020 8093 8554 ];
 
 }
