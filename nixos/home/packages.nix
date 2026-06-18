@@ -37,6 +37,7 @@
     llm-agents.packages.${pkgs.system}.opencode
     tabby-agent
     anydesk
+    postman
   ];
 
   # Add dotfile symlinks
