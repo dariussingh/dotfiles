@@ -7,6 +7,10 @@ return {
         color = "hint",
         alt = { "RESUME", "CONTINUE" },
       },
+      REVIEW = {
+        icon = "󰛨",
+        color = "warning",
+      },
     },
   },
 }
