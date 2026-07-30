@@ -82,7 +82,7 @@
 
   # Open SSH and local service ports in firewall
   networking.firewall = {
-    allowedTCPPorts = [ 22 5012 5018 5020 8093 8181 4557 8890 8554 8000 5173 8100 8080 8000 6379 8890 8181 ];
+    allowedTCPPorts = [ 22 5012 5018 5020 5000 5000 5672 15672 8093 8181 4557 8890 8554 8000 5173 8100 8080 8000 6379 8890 8181 ];
     trustedInterfaces = [
       "docker0"
     ];
