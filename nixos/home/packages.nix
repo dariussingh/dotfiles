@@ -35,6 +35,7 @@
     llm-agents.packages.${pkgs.system}.claude-code
     llm-agents.packages.${pkgs.system}.codex
     llm-agents.packages.${pkgs.system}.opencode
+    ollama
     tabby-agent
     anydesk
     postman
