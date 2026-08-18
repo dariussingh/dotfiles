@@ -63,6 +63,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
     };
 
+  home.file.".config/opencode/config.json" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/opencode.json";
+    };
+
   home.file.".codex/skills" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
     };
