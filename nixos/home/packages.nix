@@ -39,6 +39,9 @@
     tabby-agent
     anydesk
     postman
+    tailscale
+    gnome-network-displays
+    chromium
   ];
 
   # Add dotfile symlinks

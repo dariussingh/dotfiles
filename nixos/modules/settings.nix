@@ -8,9 +8,13 @@
   # Networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Time and Locale
-  time.timeZone = "Asia/Kolkata";
+  time.timeZone = "Asia/Dubai";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -91,9 +95,39 @@
 
   # Open SSH and local service ports in firewall
   networking.firewall = {
-    allowedTCPPorts = [ 22 5012 5018 5020 5000 5000 5672 15672 8093 8181 4557 8890 8554 8000 5173 8100 8080 8000 6379 8890 8181 11434 ];
+    allowedTCPPorts = [
+      22
+      # Analytic server
+      5018 5020 8093 8090
+      # Analytic Manager
+      5012
+      # RabbitMQ
+      5672 15672
+      # TimescaleDB
+      54321
+      # PostgreSQL / pgAdmin
+      5432 8083
+      # Milvus
+      19530 9091
+      # MinIO
+      9000 9001
+      # Streaming / player
+      8181 4557 8890 8554
+      # Discovery / monitor
+      8194 8191
+      # Seq logs
+      5341
+      # Anomaly detection VLM server
+      8060 8067
+      # vlm-client search UI + Qdrant REST/gRPC
+      8099 6333 6334
+      # Misc existing
+      5000 3000 3001 5173 8100 8080 6379 11434 8002 8000
+    ];
     trustedInterfaces = [
+      "tailscale0"
       "docker0"
+      "br+"  # trust all Docker compose bridge networks (i2v_network etc.)
     ];
   };
 
