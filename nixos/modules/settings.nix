@@ -55,7 +55,7 @@
     gnumake
     xclip
     home-manager # Keep home-manager in system packages
-    nodejs_22
+    nodejs_24
     ripgrep 
     fzf
     fd

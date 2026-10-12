@@ -1,5 +1,21 @@
-{ config, pkgs, llm-agents, ... }:
+{ config, pkgs, lib, llm-agents, ... }:
 
+let
+  # Link each skill individually so the runtime skill dirs stay real,
+  # writable directories (GSD and other installers refuse to write through
+  # a symlinked skills dir).
+  skillNames = [
+    "full-code-review"
+    "github-issue-workflow"
+    "github-review-comments"
+    "review-assignment"
+    "write-article"
+  ];
+  skillLinks = dir: lib.listToAttrs (map (name: {
+    name = "${dir}/${name}";
+    value.source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills/${name}";
+  }) skillNames);
+in
 {
   home.packages = with pkgs; [
     brave
@@ -45,33 +61,13 @@
   ];
 
   # Add dotfile symlinks
-  home.file.".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/nvim";
-    };
-
-  home.file.".config/alacritty/alacritty.toml" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/alacritty/alacritty.toml";
-    };
-
-
-  home.file.".tmux/tmux.conf" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux/tmux.conf";
-    };
-
-  home.file.".claude/skills" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
-    };
-
-  home.file.".config/opencode/skills" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
-    };
-
-  home.file.".config/opencode/config.json" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/opencode.json";
-    };
-
-  home.file.".codex/skills" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/ai/skills";
+  home.file = skillLinks ".claude/skills"
+    // skillLinks ".config/opencode/skills"
+    // skillLinks ".codex/skills"
+    // {
+      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/nvim";
+      ".config/alacritty/alacritty.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/alacritty/alacritty.toml";
+      ".tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/darius/dotfiles/tmux/tmux.conf";
     };
 
 # Enable vscode with specific dependencies for extensions

@@ -2,3 +2,5 @@ tmux/plugins/
 ai/skills/.system/
 *.nvimlog
 *.codex
+
+ai/skills/synced/
